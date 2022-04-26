@@ -15,11 +15,13 @@
             <select class="form-select" asp-for="Category" asp-items="@Model.Categories" onchange="onCategories_Changed(this)">
                 <option disabled selected>เลือก</option>
             </select>
+            <span class="text-danger text-sm-end float-end" asp-validation-for="Category"></span>
         </div>
         <div class="col-lg-4 col-md-6">
             <label asp-for="Group" class="form-label"></label>
             <select class="form-select" asp-for="Group">
             </select>
+            <span class="text-danger text-sm-end float-end" asp-validation-for="Group"></span>
         </div>
     </div>
 
@@ -27,6 +29,7 @@
         <div class="col-lg-4 col-md-6">
             <label asp-for="Name" class="form-label"></label>
             <input class="form-control" asp-for="Name">
+            <span class="text-danger text-sm-end float-end" asp-validation-for="Name"></span>
         </div>
         <div class="col-lg-4 col-md-6">
             <label asp-for="Image1" class="form-label"></label>
@@ -37,6 +40,7 @@
         <div class="col-lg-4 col-md-6">
             <label asp-for="Price" class="form-label"></label>
             <input type="number" class="form-control" asp-for="Price">
+            <span class="text-danger text-sm-end float-end" asp-validation-for="Price"></span>
         </div>
         <div class="col-lg-4 col-md-6">
             <label asp-for="Image2" class="form-label"></label>
@@ -44,11 +48,16 @@
         </div>
     </div>
     <div class="row mb-3">
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-1 col-md-2">
             <label asp-for="IsUsed" class="form-label"></label>
-            <div class="form-check form-switch mt-1">
-                <input type="checkbox" class="form-check-input" asp-for="IsUsed">
+            <div class="form-check form-switch mt-2">
+                <input type="checkbox" class="form-check-input" asp-for="IsUsed" onchange="onFieldConditionPercent_Changed(this)">
             </div>
+        </div>
+        <div id="fieldConditionPercent" style="visibility:collapse" class="col-lg-3 col-md-4">
+            <label asp-for="ConditionPercent" class="form-label"></label>
+            <input type="number" class="form-control" asp-for="ConditionPercent">
+            <span class="text-danger text-sm-end float-end" asp-validation-for="ConditionPercent"></span>
         </div>
         <div class="col-lg-4 col-md-6">
             <label asp-for="Image3" class="form-label"></label>
@@ -59,6 +68,7 @@
         <div class="col-lg-4 col-md-6">
             <label asp-for="Description" class="form-label"></label>
             <textarea class="form-control" rows="3" asp-for="Description"></textarea>
+            <span class="text-danger text-sm-end float-end" asp-validation-for="Description"></span>
         </div>
         <div class="col-lg-4 col-md-6">
             <label asp-for="Image4" class="form-label"></label>
@@ -86,5 +96,17 @@
                     groupSelector.add(option)
                 }
             });
+    }
+
+    function onFieldConditionPercent_Changed(sender){
+        var isUsed = sender.checked;
+        var fieldConditionPercent = document.getElementById('fieldConditionPercent');
+        var visibilityState = 'collapse'
+
+        if(isUsed){
+            visibilityState = 'visible';
+        }
+
+        fieldConditionPercent.style.visibility = visibilityState;
     }
 </script>

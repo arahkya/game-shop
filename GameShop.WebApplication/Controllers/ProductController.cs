@@ -40,10 +40,13 @@ namespace GameShop.WebApplication.Controllers
 
         [Route("post")]
         [HttpPost]
-        public IActionResult Post(PostProductModel model)
+        public async Task<IActionResult> Post(PostProductModel model)
         {
             if (!ModelState.IsValid)
             {
+                var categoriesDto = await productService.GetCategoriesAsync();
+                model.Categories = categoriesDto.Select(p => new SelectListItem(p.Name, p.Id.ToString()));
+
                 return View(model);
             }
 
